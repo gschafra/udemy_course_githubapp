@@ -10,9 +10,17 @@ import 'rxjs/add/operator/toPromise';
 })
 
 export class ProfileComponent implements OnInit {
-	private user = [];
-	private repos = [];
+	user:any;
+	repos:any[];
+	username: string;
+
 	constructor(private _githubService:GithubService) {
+		this.user = false;
+	}
+
+	searchUser() {
+		this._githubService.updateUser(this.username);
+
 		this._githubService.getUser().subscribe(user => {
 			//console.log(user);
 			this.user = user;
